@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { TTS_ENABLED } from '../featureFlags';
 import { Volume2, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
@@ -8,6 +9,7 @@ interface VoiceNarratorButtonProps {
 }
 
 export function VoiceNarratorButton({ className = "", compact = false }: VoiceNarratorButtonProps) {
+  if (!TTS_ENABLED) return null;
   const [isHovered, setIsHovered] = useState(false);
 
   return (
