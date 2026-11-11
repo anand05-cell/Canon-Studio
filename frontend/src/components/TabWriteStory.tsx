@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import { VoiceNarratorButton } from './VoiceNarratorButton';
 import { StoryAudio } from './StoryAudio';
+import { TTS_ENABLED } from '../featureFlags';
 import { StudioDeepDive } from './StudioDeepDive';
 import { Newsletter2 } from './ui/newsletter-2';
 
@@ -678,7 +679,7 @@ export function TabWriteStory({ onPlayBranching, onSaveToWriter }: TabWriteStory
                 </button>
               ) : (
                 <>
-                  <VoiceNarratorButton />
+                  {TTS_ENABLED && <VoiceNarratorButton />}
                   <button
                     onClick={() => handleIllustrateStory()}
                     disabled={isIllustrating}
@@ -716,7 +717,7 @@ export function TabWriteStory({ onPlayBranching, onSaveToWriter }: TabWriteStory
           {/* Web Speech Neural Story Audio Narrator */}
           {(generatedStory?.content || streamedContent) && !isGenerating && (
             <div className="mb-5">
-              <StoryAudio storyText={generatedStory?.content || streamedContent} />
+              {TTS_ENABLED && <StoryAudio storyText={generatedStory?.content || streamedContent} />}
             </div>
           )}
 
