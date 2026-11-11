@@ -1,8 +1,10 @@
 import { publicErrorMessage } from '../middleware/publicError.js';
 import { Router, Request, Response } from 'express';
+import { requireAuth } from './auth.js';
 import { wizardService, WizardAnswers } from '../services/wizardService.js';
 
 export const wizardRouter = Router();
+wizardRouter.use(requireAuth);
 
 /**
  * POST /api/wizard/next-question
