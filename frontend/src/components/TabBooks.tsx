@@ -14,6 +14,7 @@ import {
   Download
 } from 'lucide-react';
 import { VoiceNarratorButton } from './VoiceNarratorButton';
+import { TTS_ENABLED } from '../featureFlags';
 
 interface TabBooksProps {
   currentUser: User | null;
@@ -422,7 +423,7 @@ export function TabBooks({ currentUser, onOpenAuth }: TabBooksProps) {
               </div>
 
               <div className="flex items-center gap-2">
-                <VoiceNarratorButton />
+                {TTS_ENABLED && <VoiceNarratorButton />}
                 {/* Export Options for Reader */}
                 <div className="flex items-center gap-1 bg-studio-bg border border-studio-border rounded p-1">
                   <span className="text-[11px] text-studio-muted font-medium px-1.5 flex items-center gap-1">
