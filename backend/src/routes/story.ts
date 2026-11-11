@@ -1,10 +1,12 @@
 import { publicErrorMessage } from '../middleware/publicError.js';
 import { Router, Request, Response } from 'express';
+import { requireAuth } from './auth.js';
 import { aiService } from '../services/aiService.js';
 import { memoryTreeService } from '../services/memoryTree.js';
 import { cyberpunkUniverse } from '../data/defaultStoryBible.js';
 
 export const storyRouter = Router();
+storyRouter.use(requireAuth);
 
 /**
  * POST /api/generate-beat
