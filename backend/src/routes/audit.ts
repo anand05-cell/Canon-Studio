@@ -1,10 +1,12 @@
 import { publicErrorMessage } from '../middleware/publicError.js';
 import { Router, Request, Response } from 'express';
+import { requireAuth } from './auth.js';
 import { loreAuditor } from '../services/loreAuditor.js';
 import { memoryTreeService } from '../services/memoryTree.js';
 import { cyberpunkUniverse } from '../data/defaultStoryBible.js';
 
 export const auditRouter = Router();
+auditRouter.use(requireAuth);
 
 /**
  * POST /api/audit-lore
