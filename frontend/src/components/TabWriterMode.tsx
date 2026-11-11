@@ -19,6 +19,7 @@ import {
   Download
 } from 'lucide-react';
 import { VoiceNarratorButton } from './VoiceNarratorButton';
+import { TTS_ENABLED } from '../featureFlags';
 
 interface TabWriterModeProps {
   currentUser: User | null;
@@ -553,7 +554,7 @@ export function TabWriterMode({ currentUser, onOpenAuth, preloadedDraft }: TabWr
 
         {/* Publishing & Delete Draft Buttons */}
         <div className="flex flex-wrap items-center gap-2">
-          <VoiceNarratorButton />
+          {TTS_ENABLED && <VoiceNarratorButton />}
           {/* Screenplay & Bible Export Group */}
           <div className="flex items-center gap-1 bg-studio-raised border border-studio-border rounded p-1">
             <span className="text-[11px] text-studio-muted font-medium px-1.5 flex items-center gap-1">
