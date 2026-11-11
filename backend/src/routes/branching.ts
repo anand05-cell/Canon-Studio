@@ -3,6 +3,7 @@ import { Router, Request, Response } from 'express';
 import { branchingService, BranchingSetup, NextSceneRequest } from '../services/branchingService.js';
 import { exportService, BranchJourneyExportInput } from '../services/exportService.js';
 import { imageService } from '../services/imageService.js';
+import { requireAuth } from './auth.js';
 
 export const branchingRouter = Router();
 
@@ -10,7 +11,7 @@ export const branchingRouter = Router();
  * POST /api/branching/start
  * Body: BranchingSetup
  */
-branchingRouter.post('/start', async (req: Request, res: Response) => {
+branchingRouter.post('/start', requireAuth, async (req: Request, res: Response) => {
   try {
     const setup: BranchingSetup = req.body;
     const scene = await branchingService.startStory(setup);
@@ -29,7 +30,7 @@ branchingRouter.post('/start', async (req: Request, res: Response) => {
  * POST /api/branching/next
  * Body: NextSceneRequest
  */
-branchingRouter.post('/next', async (req: Request, res: Response) => {
+branchingRouter.post('/next', requireAuth, async (req: Request, res: Response) => {
   try {
     const requestData: NextSceneRequest = req.body;
     const scene = await branchingService.nextScene(requestData);
@@ -74,7 +75,7 @@ branchingRouter.post('/export-journey', (req: Request, res: Response) => {
  * POST /api/branching/illustrate-scene
  * Body: { sceneText: string, title?: string, genre?: string }
  */
-branchingRouter.post('/illustrate-scene', async (req: Request, res: Response) => {
+branchingRouter.post('/illustrate-scene', requireAuth, async (req: Request, res: Response) => {
   try {
     const { sceneText, title, genre } = req.body;
     if (!sceneText) {
