@@ -1,8 +1,10 @@
 import { publicErrorMessage } from '../middleware/publicError.js';
 import { Router, Request, Response } from 'express';
+import { requireAuth } from './auth.js';
 import { voiceAnalyzer } from '../services/voiceAnalyzer.js';
 
 export const voiceRouter = Router();
+voiceRouter.use(requireAuth);
 
 /**
  * POST /api/analyze-voice
